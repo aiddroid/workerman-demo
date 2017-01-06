@@ -6,6 +6,7 @@ use Workerman\Worker;
 
 $global_uid = 0;
 
+//setup worker
 $worker = new Worker('Text://0.0.0.0:8801');
 $worker->count = 4;
 $worker->onConnect = function($connection){
