@@ -1,14 +1,17 @@
 <?php
 
-require_once __DIR__.'/../vendor/autoload.php';
-
 use Workerman\Worker;
 use \Workerman\Lib\Timer;
 
 //setup worker
 $taskWorker = new Worker();
-//set worker number
+
+//set worker name
+$taskWorker->name = 'TaskWorker';
+
+//set worker count
 $taskWorker->count = 1;
+
 //set onWorkerStart handler
 $taskWorker->onWorkerStart = function($task){
     $timeInterval = 1.0;
@@ -21,9 +24,7 @@ $taskWorker->onWorkerStart = function($task){
             echo "#{$counter} current time:{$time}" . PHP_EOL;
         } else {
             Timer::del($timerId);
-            echo "timer deleted.";
+            echo "timer deleted." . PHP_EOL;
         }
     });
 };
-//run worker
-Worker::runAll();
