@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 use Workerman\Worker;
 
 $channelServer = new Channel\Server('0.0.0.0', 2206);
@@ -27,3 +29,8 @@ $worker1->onConnect = function ($connection) {
 $worker1->onMessage = function ($connection, $data) {
     Channel\Client::publish('broadcast', $data);
 };
+
+//if not global start,then start at here
+if(!defined('GLOBAL_START')) {
+    Worker::runAll();
+}

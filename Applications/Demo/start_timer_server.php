@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 use Workerman\Worker;
 use \Workerman\Lib\Timer;
 
@@ -28,3 +30,8 @@ $taskWorker->onWorkerStart = function($task){
         }
     });
 };
+
+//if not global start,then start at here
+if(!defined('GLOBAL_START')) {
+    Worker::runAll();
+}

@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+
 use Workerman\Worker;
 
 //setup worker
@@ -36,3 +38,8 @@ $worker4->onClose = function ($connection) {
         $conn->send("#{$connection->id} left. total:{$total}");
     }
 };
+
+//if not global start,then start at here
+if(!defined('GLOBAL_START')) {
+    Worker::runAll();
+}
